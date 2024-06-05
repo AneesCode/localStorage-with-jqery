@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <title>Record</title>
+    <style>
+        .container {
+            width: 100%;
+            max-width: 1150px;
+            margin: 0 auto;
+            padding-top: 50px;
+        }
+
+        .table {
+            border-collapse: collapse;
+            width: 100%;
+
+        }
+
+        thead {
+            width: 100%;
+            background-color: #99b19c;
+        }
+
+        tr {}
+
+        th {
+            text-align: left;
+            font-size: 18px;
+            font-family: sans-serif;
+            width: 100px;
+            padding: 30px 10px;
+            color: white;
+        }
+
+        td {
+            text-align: left;
+            font-size: 15px;
+            font-family: sans-serif;
+            width: 100px;
+            padding: 30px 10px;
+            color: black;
+        }
+
+        h1 {
+            text-align: center;
+            font-family: sans-serif;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: rgb(233, 231, 231);
+        }
+
+        .filter input,
+        select {
+            margin: 10px 0;
+            padding: 10px;
+            font-size: 18px;
+            border: 2px solid gray;
+            border-radius: 5px;
+
+        }
+
+        .bottom-field {
+            width: 100%;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .pagination li {
+            list-style: none;
+            padding: 2px;
+            margin: 10px;
+            flex-shrink: 0;
+            text-align: center;
+            border-radius: 5px;
+            border: 1px solid #999;
+            color: #999;
+        }
+
+        .pagination li.active {
+            background: #32d6aa;
+            color: white;
+            border-color: #32d6aa;
+        }
+
+        .pagination li a {
+            text-decoration: none;
+            color: inherit;
+            padding: 3px 8px;
+            display: block;
+            font-family: sans-serif;
+            font-size: 13px;
+        }
+
+        .filter button {
+            width: fit-content;
+            min-width: 100px;
+            height: 45px;
+            padding: 8px;
+            border-radius: 5px;
+            border: 2.5px solid #E0E1E4;
+            box-shadow: 0px 0px 20px -20px;
+            cursor: pointer;
+            background-color: white;
+            transition: all 0.2s ease-in-out 0ms;
+            user-select: none;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .filter button:hover {
+            background-color: #F2F2F2;
+            box-shadow: 0px 0px 20px -18px;
+        }
+
+        .filter button:active {
+            transform: scale(0.95);
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <form action="index2.html">
+
+    </form>
+
+    <div class="container">
+        <h1>Details</h1>
+        <div class="header">
+            <div class="filter">
+                <input type="text" id="input-value" onkeyup="search()">
+
+                <select name="" id="select" onchange="search()">
+                    <option value="RWP">RWP</option>
+                    <option value="ISLD">ISLD</option>
+                    <option value="ALL" selected>ALL</option>
+                </select>
+                <button id="sortable">SORT</button>
+                <button id="unsort">UNSORT</button>
+                <button onclick="sorting()">Num sort</button>
+            </div>
+            <div class="paginations" style="display: flex; gap: 10px;">
+                <select name="" id="itemshow">
+                    <option value="03">03</option>
+                    <option value="05" selected>05</option>
+                    <option value="08">08</option>
+                    <option value="10">10</option>
+                </select>
+                <h5>Per Page</h5>
+            </div>
+        </div>
+        <table class="table" id="table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Location</th>
+                    <th>View details</th>
+                    <th>Remove</th>
+                </tr>
+            </thead>
+            <tbody class="tbody">
+                <tr></tr>
+
+            </tbody>
+        </table>
+        <div class="bottom-field">
+            <span class="pagination-detail"></span>
+            <ul class="pagination">
+                <li class="prev"><a href="#" id="prev">&#139;&#139;</a></li>
+                <li class="list"><a href="#">01</a></li>
+                 <li class="list"><a href="#">02</a></li>
+                 <li class="list"><a href="#">03</a></li>
+                <li class="next"><a href="#" id="next">&#155;&#155;</a></li>
+            </ul>
+        </div>
+    </div>
+  
+    <script src="app.js"></script>
+    <script>
+        // let sorting = () => {
+        //     let a, b, i, shouldswitch;
+        //     let switching = true;
+        //     let table = document.querySelector(".tbody")
+        //     while (switching) {
+        //         switching = false;
+        //         console.log();
+        //         row = table.rows;
+        //         console.log(switching);
+
+        //         for (i = 0; i < (row.length - 1); i++) {
+        //             shouldswitch = false;
+        //             a = row[i].getElementsByTagName("td")[2];
+        //             console.log(a);
+        //             b = row[i + 1].getElementsByTagName("td")[2];
+        //             console.log(b);
+        //             if (Number(a.innerHTML) > Number(b.innerHTML)) {
+        //                 shouldswitch = true;
+        //                 break
+        //             }
+        //         }
+        //         if (shouldswitch) {
+        //             row[i].parentNode.insertBefore(row[i + 1], row[i])
+        //             switching = true;
+        //         }
+
+        //     }
+        // }
+        // const searchInput = document.getElementById("search")
+        // const tbdy = document.querySelectorAll("tbody tr");
+        // console.log(tbdy);
+        // searchInput.addEventListener("keyup", function (event) {
+        //     // console.log(event)
+        //     let q = event.target.value;
+        //     console.log(q);
+        //     tbdy.forEach(row => {
+        //         console.log(row.querySelector("td").textContent.startWith(q));
+        //         row.querySelector("td").textContent.toLowerCase().startWith(q) ?
+        //             (row.style.display = " ") :
+        //             (row.style.display = "none");
+        //     })
+        // })
+        // function searchname(){
+        //     let value = document.getElementById("input-value1").value.toUpperCase();
+        //     console.log(value);
+        //     let tbody= document.querySelector("tbody");
+        //     let tr = tbody.getElementsByTagName("tr")
+        //     // console.log(tr);
+        //     for(let i=0; i<tr.length; i++){
+        //         let product =tr[i].getElementsByTagName("td")[0];
+        //         // console.log(tr[i]);
+        //         if(product){
+        //         storeitem =  product.innerHTML || product.innerText;
+        //             console.log(storeitem == value);
+
+        //             values[i] !== null && values[i] !== undefined
+
+        //             if(storeitem.toUpperCase() == value > -1){
+        //                 tr[i].style.display ="";
+        //             }else{
+        //                 tr[i].style.display ="none";
+        //             }
+        //         }
+        //     }
+        // }
+
+
+
+        // searchInput.addEventListener("onkeyup", function (event){
+        //     const q = event.target.value
+        //     console.log(q);
+        // })
+    </script>
+</body>
+
+</html>

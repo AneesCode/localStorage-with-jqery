@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <title>form</title>
+    <style>
+       .container{
+        width: 100%;
+        max-width: 1150px;
+        margin: 0 auto;
+        padding-top: 50px;
+       }
+            button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  outline: none;
+  cursor: pointer;
+  width: 150px;
+  height: 50px;
+  background-image: linear-gradient(to top, #D8D9DB 0%, #fff 80%, #FDFDFD 100%);
+  border-radius: 30px;
+  border: 1px solid #8F9092;
+  transition: all 0.2s ease;
+  font-family: "Source Sans Pro", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #606060;
+  text-shadow: 0 1px #fff;
+  text-align: center;
+  margin-top: 10px;
+  display: block;
+}
+
+button:hover {
+  box-shadow: 0 4px 3px 1px #FCFCFC, 0 6px 8px #D6D7D9, 0 -4px 4px #CECFD1, 0 -6px 4px #FEFEFE, inset 0 0 3px 3px #CECFD1;
+}
+h1{
+    text-align: center;
+    font-family: sans-serif;
+}
+form{
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    font-family: sans-serif;
+}
+input{
+    width: 100%;
+    margin: 10px 0;
+    padding: 10px;
+    font-size: 18px;
+    border: 2px solid gray;
+    border-radius: 5px;
+}
+
+a{
+    display: inline-block;
+    margin-top: 15px;
+}
+
+
+
+
+        
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form method="get" action=" " id="idForm" >
+        <h1>Register Today</h1>
+        <label for="">Name</label>
+        <input type="text" id="name" name="name" placeholder="Enter Name">
+         <label for="">Phone No</label>
+        <input type="text" id="phoneno" name="phoneno"  placeholder="Enter phone">
+         <label for="">Email</label>
+        <input type="text" id="email" name="email"  placeholder="Enter Your Email">
+         <label for="">Location</label>
+            <select id="location" name="location">
+                <option value="ISLD">ISLD</option>
+                <option value="RWP">RWP</option>
+            </select>
+         <input type="hidden" id="hidden" value="" name="hide">
+         <button>Submit</button>
+        <a href="table.html">View details</a>
+    </form>
+    </div>
+    <script src="app.js">
+
+    </script>
+<!-- <script>
+    let params = new URLSearchParams('name=abc&phone=0315552$email=abc@gmail.com');
+    console.log(params);
+</script> -->
+</body>
+</html>
